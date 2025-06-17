@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Altiven s.r.o.</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            color: #00563b;
+        }
+
+        button {
+            padding: 15px 30px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            margin: 10px;
+            width: 250px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            color: white;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+
+<h1>Altiven s.r.o. - Stavební kalkulačka</h1>
+
+<div class="button-container">
+    <button onclick="window.location.href='cenik.html'">Ceník prací</button>
+    <button onclick="window.location.href='novanabidka.html'">Nová nabídka</button>
+    <button onclick="window.location.href='vytvoritsmlouvu.html'">Vytvořit smlouvu</button>
+    <button onclick="window.location.href='predavaciprotokol.html'">Předávací protokol</button>
+    <button onclick="window.location.href='generovatfakturu.html'">Generovat fakturu</button>
+    <button onclick="logout()">Odhlásit</button>
+</div>
+
+</body>
+</html>

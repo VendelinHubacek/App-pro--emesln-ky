@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Demontážníci - Ceník prací</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #00563b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #f44336;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .input-field {
+            width: 80px;
+            text-align: center;
+        }
+
+        .calculate-btn {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .calculate-btn:hover {
+            background-color: #45a049;
+        }
+
+        .section-title {
+            background-color: #ddd;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: left;
+        }
+
+        #floating-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #fff;
+            border: 2px solid #4CAF50;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            font-size: 18px;
+            color: #333;
+        }
+
+        #floating-total {
+            font-size: 22px;
+            color: #4CAF50;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Demontážníci - Ceník prací</h1>
+
+<table>
+    <tr>
+        <th>Fotografie</th>
+        <th>Pracovní úkon</th>
+        <th>Cena</th>
+        <th>Počet</th>
+        <th>Celková cena</th>
+    </tr>
+
+    <tr><td colspan="5" class="section-title">Demontáž sanity</td></tr>
+    <tr><td>-</td><td>Demontáž vany klasické vč. vybourání pobezdívky</td><td>700 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž vany rohové vč. vybourání pobezdívky</td><td>806 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž sprchové vaničky</td><td>275 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž sprchové zástěny</td><td>363 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž vanové zástěny</td><td>313 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž WC kombi</td><td>275 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž stojacího bidetu</td><td>250 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž umyvadla</td><td>263 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž umyvadla se skříňkou</td><td>313 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž baterie nástěnné</td><td>113 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Demontáž dveří</td></tr>
+    <tr><td>-</td><td>Demontáž interierových dveří</td><td>31 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž interierových dveří včetně obložkové zárubně z lamina</td><td>175 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž interierových jednokřídlých dveří včetně obložkové zárubně z masivu</td><td>300 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž interierových dvoukřídlých dveří včetně obložkové zárubně z masivu</td><td>444 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž zazděné ocelové zárubně</td><td>344 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž ocelové zárubně včetně výřezu zděné příčky do tl.100mm</td><td>669 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž ocelové zárubně včetně výřezu betonové příčky do tl.60mm</td><td>544 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Škrábání malby a tapet</td></tr>
+    <tr><td>-</td><td>Oškrábání staré malby na stěně</td><td>38 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Oškrábání staré malby na stropě</td><td>50 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Strhávání papírových tapet na stěně (1 vrstva)</td><td>69 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Demontáž sádrokartonových konstrukcí</td></tr>
+    <tr><td>-</td><td>Demontáž sádrokartonového podhledu (1x záklop)</td><td>119 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž sádrokartonového podhledu (2x záklop)</td><td>144 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž sádrokartonové šikminy (1x záklop)</td><td>119 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž sádrokartonové příčky (1x záklop)</td><td>150 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž sádrokartonové příčky (2x záklop)</td><td>169 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž sádrokartonové předstěny (1x záklop)</td><td>100 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž sádrokartonové předstěny (2x záklop)</td><td>131 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž dvoustranného sádrokartonového kastlíku (1x záklop)</td><td>113 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž tepelné izolace (1 vrstva)</td><td>19 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž kazetového podhledu</td><td>94 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž lepených okrasných polystyrenových čtverců na podhledu</td><td>44 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td colspan="5" class="section-title">Demontáž elektroinstalací</td></tr>
+    <tr><td>-</td><td>Demontáž staré elektroinstalace garsoniéry</td><td>1 500 Kč / kpl</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž staré elektroinstalace bytu 1+1 (2+kk)</td><td>1 713 Kč / kpl</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž staré elektroinstalace bytu 2+1 (3+kk)</td><td>1 931 Kč / kpl</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž staré elektroinstalace bytu 3+1 (4+kk)</td><td>2 144 Kč / kpl</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž staré elektroinstalace bytu 4+1 (5+kk)</td><td>2 356 Kč / kpl</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž staré elektroinstalace bytu 5+1 (6+kk)</td><td>2 569 Kč / kpl</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Demontáž vodo-topo-plynoinstalací</td></tr>
+    <tr><td>-</td><td>Demontáž staré vodoinstalace a odpadů</td><td>1 794 Kč / kpl</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž starého rozvodu plynu</td><td>1 288 Kč / kpl</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž geberitu včetně vyzdívky</td><td>444 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž geberitu pro WC</td><td>228 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž bojleru do 100l</td><td>750 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž starého rozvodu ústředního vytápění bytu</td><td>1 790 Kč / kpl</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž starého rozvodu ústředního vytápění bytu vč. radiátorů</td><td>2 213 Kč / kpl</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž starého rozvodu ústředního vytápění bytu vč. radiátorů a kotle</td><td>3 681 Kč / kpl</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž litinového radiátoru</td><td>431 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž plechového radiátoru</td><td>356 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž topného žebříku</td><td>356 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž topení WAW vč. demontáže komínu</td><td>700 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Demontáž plynové karmy</td><td>800 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+</table>
+
+<button class="calculate-btn" onclick="goToNabidka()">Přejít na novou nabídku</button>
+<button class="calculate-btn" onclick="window.location.href='cenik.html'">Zvolit jiné řemeslo</button>
+
+<div id="grand-total" style="font-size: 24px; font-weight: bold; margin-top: 30px;">
+    Celková cena všech prací: 0 Kč
+</div>
+
+<div id="floating-box">
+    <strong>Celkem:</strong>
+    <div id="floating-total">0 Kč</div>
+</div>
+
+<script>
+    function calculateTotal() {
+        const rows = document.querySelectorAll("table tr");
+        let grandTotal = 0;
+
+        rows.forEach(row => {
+            const cenaBunka = row.cells[2]?.textContent;
+            const cena = cenaBunka ? parseFloat(cenaBunka.replace(/[^\d.]/g, '')) : 0;
+            const mnozstvi = parseFloat(row.cells[3]?.querySelector('input')?.value) || 0;
+            const celkem = cena * mnozstvi;
+
+            const cil = row.cells[4]?.querySelector('.total-price');
+            if (cil) {
+                cil.textContent = celkem.toFixed(2) + ' Kč';
+            }
+
+            if (!isNaN(celkem)) {
+                grandTotal += celkem;
+            }
+        });
+
+        document.getElementById("grand-total").textContent = "Celková cena všech prací: " + grandTotal.toFixed(2) + " Kč";
+        document.getElementById("floating-total").textContent = grandTotal.toFixed(2) + " Kč";
+    }
+
+    function saveData() {
+        const rows = document.querySelectorAll("table tr");
+        let data = [];
+
+        rows.forEach(row => {
+            const name = row.cells[1]?.textContent;
+            const price = row.cells[2]?.textContent;
+            const quantity = row.cells[3]?.querySelector('input')?.value;
+            const total = row.cells[4]?.querySelector('.total-price')?.textContent;
+
+            if (name && price && quantity > 0) {
+                data.push({
+                    name: name.trim(),
+                    price: price.trim(),
+                    quantity: quantity,
+                    total: total.trim()
+                });
+            }
+        });
+
+        localStorage.setItem('nabidkaData', JSON.stringify(data));
+    }
+
+    function goToNabidka() {
+        saveData();
+        window.location.href = 'novanabidka.html';
+    }
+
+    document.querySelectorAll('.input-field').forEach(input => {
+        input.addEventListener('input', () => {
+            calculateTotal();
+            saveData();
+        });
+    });
+
+    window.addEventListener('load', () => {
+        calculateTotal();
+    });
+</script>
+
+</body>
+</html>

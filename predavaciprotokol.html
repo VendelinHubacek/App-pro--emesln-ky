@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Předávací protokol</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Předávací protokol</h1>
+
+        <form id="protokolForm">
+            <h2>Údaje o objednateli</h2>
+            <label>Jméno / Název:</label>
+            <input type="text" id="objednatel" required>
+
+            <label>Adresa:</label>
+            <input type="text" id="adresaObjednatel" required>
+
+            <label>IČO:</label>
+            <input type="text" id="icoObjednatel">
+
+            <label>DIČ:</label>
+            <input type="text" id="dicObjednatel">
+
+            <h2>Údaje o dodavateli</h2>
+            <label>Jméno / Název:</label>
+            <input type="text" id="dodavatel" required>
+
+            <label>Adresa:</label>
+            <input type="text" id="adresaDodavatel" required>
+
+            <label>IČO:</label>
+            <input type="text" id="icoDodavatel">
+
+            <label>DIČ:</label>
+            <input type="text" id="dicDodavatel">
+
+            <h2>Podrobnosti</h2>
+            <label>Předmět díla:</label>
+            <input type="text" id="predmet" required>
+
+            <label>Místo realizace:</label>
+            <input type="text" id="misto" required>
+
+            <label>Datum předání:</label>
+            <input type="date" id="datum" required>
+
+            <label>Výhrady:</label>
+            <textarea id="vyhrady" placeholder="Napište případné výhrady..."></textarea>
+
+            <div class="buttons">
+                <button type="button" onclick="generovatPDF()">Uložit do PDF</button>
+                <button type="button" onclick="window.print()">Tisk</button>
+                <button type="button" onclick="odeslatEmailem()">Odeslat e-mailem</button>
+                <button type="submit">Uložit protokol</button>
+            </div>
+        </form>
+
+        <div class="nav-buttons">
+            <button onclick="window.location.href='index.html'">Zpět na hlavní stránku</button>
+            <button onclick="window.location.href='generovatfakturu.html'">Přejít na fakturu</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script>
+        // Po načtení stránky vyplnit objednatele z localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            const ulozenyZakaznik = JSON.parse(localStorage.getItem('ulozenyZakaznik'));
+            if (ulozenyZakaznik) {
+                document.getElementById('objednatel').value = ulozenyZakaznik.name;
+            }
+        });
+    </script>
+</body>
+
+</html>

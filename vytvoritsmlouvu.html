@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vytvořit pracovní smlouvu</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container wide">
+    <h1>Vytvořit pracovní smlouvu</h1>
+
+    <form id="smlouvaForm">
+      <label>Zhotovitel:</label>
+      <input type="text" id="zhotovitel" required>
+
+      <label>Objednatel:</label>
+      <input type="text" id="objednatel" required>
+
+      <label>Předmět práce:</label>
+      <input type="text" id="prace" required>
+
+      <label>Cena:</label>
+      <input type="text" id="cena" required>
+
+      <label>Datum zahájení:</label>
+      <input type="date" id="datumOd" required>
+
+      <label>Datum dokončení:</label>
+      <input type="date" id="datumDo" required>
+
+      <label>Poznámky:</label>
+      <textarea id="poznamky"></textarea>
+
+      <h3>Volitelné podmínky:</h3>
+      <label><input type="checkbox" id="zaskrtnoutVse"> Zaškrtnout všechny</label><br>
+
+      <label><input type="checkbox" class="klauzule" value="elektrina"> Objednatel zajistí elektriku</label><br>
+      <label><input type="checkbox" class="klauzule" value="voda"> Objednatel zajistí vodu</label><br>
+      <label><input type="checkbox" class="klauzule" value="hygiena"> Objednatel zajistí hygienické zázemí</label><br>
+      <label><input type="checkbox" class="klauzule" value="pristup"> Objednatel zajistí přístup ke stavbě</label><br>
+      <label><input type="checkbox" class="klauzule" value="pokuta"> Smluvní pokuta za prodlení</label><br>
+      <label><input type="checkbox" class="klauzule" value="odstoupeni"> Pokuta za neoprávněné odstoupení</label><br>
+      <label><input type="checkbox" class="klauzule" value="skoda"> Náhrada škody</label><br>
+      <label><input type="checkbox" class="klauzule" value="uklid"> Poplatek za úklid</label><br>
+      <label><input type="checkbox" class="klauzule" value="zaruka"> Záruka na dílo</label><br>
+      <label><input type="checkbox" class="klauzule" value="mlcenlivost"> Mlčenlivost</label><br><br>
+
+      <button type="submit">Vytvořit pracovní smlouvu</button><br><br>
+      <button type="button" onclick="zpetNaHlavni()">Zpět na hlavní stránku</button>
+      <button type="button" onclick="dalsiKrok('predavaciprotokol.html')">Další krok</button>
+    </form>
+  </div>
+
+  <script src="js/script.js"></script>
+
+  <script>
+    // Po načtení stránky vyplnit objednatele z localStorage
+    document.addEventListener('DOMContentLoaded', () => {
+      const ulozenyZakaznik = JSON.parse(localStorage.getItem('ulozenyZakaznik'));
+      if (ulozenyZakaznik) {
+        document.getElementById('objednatel').value = ulozenyZakaznik.name;
+      }
+    });
+  </script>
+</body>
+</html>

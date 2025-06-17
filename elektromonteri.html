@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Elektrikáři - Ceník prací</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1, h2 {
+            color: #00563b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #f44336;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .input-field {
+            width: 80px;
+            text-align: center;
+        }
+
+        .calculate-btn {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .calculate-btn:hover {
+            background-color: #45a049;
+        }
+
+        .section-title {
+            background-color: #ddd;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: left;
+        }
+
+        #floating-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #fff;
+            border: 2px solid #4CAF50;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            font-size: 18px;
+            color: #333;
+        }
+
+        #floating-total {
+            font-size: 22px;
+            color: #4CAF50;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Elektrikáři - Ceník prací</h1>
+
+<table>
+    <tr>
+        <th>Fotografie</th>
+        <th>Pracovní úkon</th>
+        <th>Cena</th>
+        <th>Počet (mb / ks / hod)</th>
+        <th>Celková cena</th>
+    </tr>
+
+    <tr><td colspan="5" class="section-title">Sekání šliců (drážek) a kapes</td></tr>
+    <tr><td><img src="elektrik1.jpg" width="100"></td><td>Sekání drážky v ytongu do 30x30 mm</td><td>65 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik2.jpg" width="100"></td><td>Sekání drážky v ytongu do 50x40 mm</td><td>75 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik3.jpg" width="100"></td><td>Sekání drážky v ytongu do 100x40 mm</td><td>120 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik4.jpg" width="100"></td><td>Sekání drážky v ytongu do 200x40 mm</td><td>145 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik5.jpg" width="100"></td><td>Sekání drážky v cihlové stěně do 30x30 mm</td><td>75 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik6.jpg" width="100"></td><td>Sekání drážky v cihlové stěně do 50x40 mm</td><td>85 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik7.jpg" width="100"></td><td>Sekání drážky v cihlové stěně do 100x40 mm</td><td>115 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik8.jpg" width="100"></td><td>Sekání drážky v cihlové stěně do 200x40 mm</td><td>150 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik9.jpg" width="100"></td><td>Sekání drážky v betonu do 30x30 mm</td><td>100 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik10.jpg" width="100"></td><td>Sekání drážky v betonu do 50x40 mm</td><td>125 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik11.jpg" width="100"></td><td>Výřez drážek + sekání šlicu v betonu do 30x30 mm</td><td>140 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik12.jpg" width="100"></td><td>Výřez drážek + sekání šlicu v betonu do 50x30 mm</td><td>190 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik13.jpg" width="100"></td><td>Výřez drážek + sekání šlicu v betonu do 100x40 mm</td><td>245 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik14.jpg" width="100"></td><td>Výřez drážek + sekání šlicu v betonu do 200x40 mm</td><td>295 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td><img src="elektrik15.jpg" width="100"></td><td>Vykroužení kapsy pro krabici v ytongu (průměr 72 mm)</td><td>70 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik16.jpg" width="100"></td><td>Vykroužení kapsy pro krabici v ytongu (do 150 mm)</td><td>100 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik17.jpg" width="100"></td><td>Vykroužení kapsy pro krabici v cihle (průměr 72 mm)</td><td>88 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik18.jpg" width="100"></td><td>Vykroužení kapsy pro krabici v cihle (do 150 mm)</td><td>119 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik19.jpg" width="100"></td><td>Vykroužení kapsy pro krabici v betonu (průměr 72 mm)</td><td>125 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik20.jpg" width="100"></td><td>Vykroužení kapsy pro krabici v betonu (do 150 mm)</td><td>163 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td><img src="elektrik21.jpg" width="100"></td><td>Vykroužení kapsy pro krabici v železobetonu (průměr 72 mm)</td><td>188 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik22.jpg" width="100"></td><td>Vykroužení kapsy pro krabici v železobetonu (do 150 mm)</td><td>231 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td><img src="elektrik23.jpg" width="100"></td><td>Vykroužení kapsy pro krabici v sádrokartonu (průměr 72 mm)</td><td>50 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik24.jpg" width="100"></td><td>Vykroužení kapsy pro krabici v sádrokartonu (do 150 mm)</td><td>56 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td><img src="elektrik25.jpg" width="100"></td><td>Sekání kapsy pro rozvaděč v ytongu (400x500 mm)</td><td>494 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik26.jpg" width="100"></td><td>Sekání kapsy pro rozvaděč v ytongu (600x1000 mm)</td><td>769 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik27.jpg" width="100"></td><td>Sekání kapsy pro rozvaděč v cihle (400x500 mm)</td><td>544 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik28.jpg" width="100"></td><td>Sekání kapsy pro rozvaděč v cihle (600x1000 mm)</td><td>856 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik29.jpg" width="100"></td><td>Výřez otvoru pro rozvaděč v sádrokartonu (400x500 mm)</td><td>106 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik30.jpg" width="100"></td><td>Výřez otvoru pro rozvaděč v sádrokartonu (600x1000 mm)</td><td>163 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td colspan="5" class="section-title">Krabice</td></tr>
+    <tr><td><img src="elektrik31.jpg" width="100"></td><td>Osazení krabice do zděné konstrukce vč. sádrování</td><td>34 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik32.jpg" width="100"></td><td>Osazení krabice do sádrokartonu</td><td>24 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik33.jpg" width="100"></td><td>Osazení dvojité krabice do sádrokartonu</td><td>29 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik34.jpg" width="100"></td><td>Osazení trojité krabice do sádrokartonu</td><td>35 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik35.jpg" width="100"></td><td>Osazení čtyřnásobné krabice do sádrokartonu</td><td>40 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik36.jpg" width="100"></td><td>Osazení pětinásobné krabice do sádrokartonu</td><td>47 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik37.jpg" width="100"></td><td>Zapojení vodičů v propojovací krabici</td><td>33 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik38.jpg" width="100"></td><td>Zavíčkování krabice</td><td>4 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Tahání kabelů</td></tr>
+    <tr><td><img src="elektrik39.jpg" width="100"></td><td>Tahání kabelu CYKY 3x2,5 mm ve zdech vč. sádrování</td><td>33 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik40.jpg" width="100"></td><td>Tahání kabelu CYKY 3x2,5 mm v sádrokartonu</td><td>30 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik41.jpg" width="100"></td><td>Tahání kabelu CYKY 3x2,5 mm volně</td><td>32 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik42.jpg" width="100"></td><td>Tahání kabelu CYKY 3x2,5 mm v ocelových žlabech</td><td>25 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik43.jpg" width="100"></td><td>Tahání kabelu CYKY 3x2,5 mm v ohebných trubkách</td><td>29 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik44.jpg" width="100"></td><td>Tahání kabelu CYKY 5x2,5 mm ve zdech vč. sádrování</td><td>38 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik45.jpg" width="100"></td><td>Tahání kabelu CYKY 5x2,5 mm v sádrokartonu</td><td>35 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik46.jpg" width="100"></td><td>Tahání kabelu CYKY 4x10 mm (cihla, sdk, žlaby)</td><td>55 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td><img src="elektrik47.jpg" width="100"></td><td>Tahání zemnícího drátu ve zdech vč. sádrování</td><td>29 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik48.jpg" width="100"></td><td>Tahání zemnícího drátu v sádrokartonu</td><td>24 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik49.jpg" width="100"></td><td>Tahání zemnícího drátu volně</td><td>22 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td><img src="elektrik50.jpg" width="100"></td><td>Tahání kabelu koax ve zdech vč. sádrování</td><td>29 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik51.jpg" width="100"></td><td>Tahání kabelu koax v sádrokartonu</td><td>24 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik52.jpg" width="100"></td><td>Tahání kabelu koax volně</td><td>22 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td colspan="5" class="section-title">Rozvaděče</td></tr>
+    <tr><td><img src="elektrik53.jpg" width="100"></td><td>Osazení rozvaděče do zdi vč. sádrování (400x500 mm)</td><td>615 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik54.jpg" width="100"></td><td>Osazení rozvaděče do zdi vč. sádrování (600x1000 mm)</td><td>922 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik55.jpg" width="100"></td><td>Osazení rozvaděče na zeď (400x500 mm)</td><td>423 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik56.jpg" width="100"></td><td>Osazení rozvaděče na zeď (600x1000 mm)</td><td>635 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik57.jpg" width="100"></td><td>Osazení rozvaděče do sádrokartonu (400x500 mm)</td><td>492 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik58.jpg" width="100"></td><td>Osazení rozvaděče do sádrokartonu (600x1000 mm)</td><td>737 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Zapojení jističů a vypínačů</td></tr>
+    <tr><td><img src="elektrik59.jpg" width="100"></td><td>Zapojení jednofázového jističe v rozvaděči</td><td>232 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik60.jpg" width="100"></td><td>Zapojení třífázového jističe v rozvaděči</td><td>457 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik61.jpg" width="100"></td><td>Zapojení jednofázového proudového chrániče</td><td>322 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik62.jpg" width="100"></td><td>Zapojení třífázového proudového chrániče</td><td>475 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik63.jpg" width="100"></td><td>Zapojení hlavního vypínače v rozvaděči</td><td>350 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik64.jpg" width="100"></td><td>Zapojení zvonku v rozvaděči</td><td>165 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Ostatní práce</td></tr>
+    <tr><td><img src="elektrik65.jpg" width="100"></td><td>Montáž objímky se žárovkou</td><td>44 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik66.jpg" width="100"></td><td>Zapojení digestoře</td><td>483 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik67.jpg" width="100"></td><td>Zapojení ventilátoru</td><td>483 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik68.jpg" width="100"></td><td>Zapojení elektrické varné desky</td><td>483 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik69.jpg" width="100"></td><td>Zapojení trouby</td><td>483 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik70.jpg" width="100"></td><td>Zapojení bojleru</td><td>483 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Revize</td></tr>
+    <tr><td><img src="elektrik71.jpg" width="100"></td><td>Revize elektroinstalace bytu 1+1</td><td>2 313 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik72.jpg" width="100"></td><td>Revize elektroinstalace bytu 2+1</td><td>2 688 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik73.jpg" width="100"></td><td>Revize elektroinstalace bytu 3+1</td><td>3 063 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik74.jpg" width="100"></td><td>Revize elektroinstalace bytu 4+1</td><td>3 438 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik75.jpg" width="100"></td><td>Revize elektroinstalace bytu 5+1</td><td>3 813 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="elektrik76.jpg" width="100"></td><td>Revize elektrospotřebiče</td><td>313 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Hodinové sazby</td></tr>
+    <tr><td><img src="elektrik77.jpg" width="100"></td><td>Elektrikářské práce</td><td>350 Kč / hod</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+</table>
+
+<button class="calculate-btn" onclick="goToNabidka()">Přejít na novou nabídku</button>
+<button class="calculate-btn" onclick="window.location.href='cenik.html'">Zvolit jiné řemeslo</button>
+
+<div id="grand-total" style="font-size: 24px; font-weight: bold; margin-top: 30px;">
+    Celková cena všech prací: 0 Kč
+</div>
+
+<div id="floating-box">
+    <strong>Celkem:</strong>
+    <div id="floating-total">0 Kč</div>
+</div>
+
+<script>
+    function calculateTotal() {
+        const rows = document.querySelectorAll("table tr");
+        let grandTotal = 0;
+
+        rows.forEach(row => {
+            const cenaBunka = row.cells[2]?.textContent;
+            const cena = cenaBunka ? parseFloat(cenaBunka.replace(/[^\d.]/g, '')) : 0;
+            const mnozstvi = parseFloat(row.cells[3]?.querySelector('input')?.value) || 0;
+            const celkem = cena * mnozstvi;
+
+            const cil = row.cells[4]?.querySelector('.total-price');
+            if (cil) {
+                cil.textContent = celkem.toFixed(2) + ' Kč';
+            }
+
+            if (!isNaN(celkem)) {
+                grandTotal += celkem;
+            }
+        });
+
+        const grandTotalElement = document.getElementById("grand-total");
+        if (grandTotalElement) {
+            grandTotalElement.textContent = "Celková cena všech prací: " + grandTotal.toFixed(2) + " Kč";
+        }
+
+        const floatingTotal = document.getElementById("floating-total");
+        if (floatingTotal) {
+            floatingTotal.textContent = grandTotal.toFixed(2) + " Kč";
+        }
+    }
+
+    function saveData() {
+        const rows = document.querySelectorAll("table tr");
+        let data = [];
+
+        rows.forEach(row => {
+            const name = row.cells[1]?.textContent;
+            const price = row.cells[2]?.textContent;
+            const quantity = row.cells[3]?.querySelector('input')?.value;
+            const total = row.cells[4]?.querySelector('.total-price')?.textContent;
+
+            if (name && price && quantity > 0) {
+                data.push({
+                    name: name.trim(),
+                    price: price.trim(),
+                    quantity: quantity,
+                    total: total.trim()
+                });
+            }
+        });
+
+        localStorage.setItem('nabidkaData', JSON.stringify(data));
+    }
+
+    function goToNabidka() {
+        saveData();
+        window.location.href = 'novanabidka.html';
+    }
+
+    document.querySelectorAll('.input-field').forEach(input => {
+        input.addEventListener('input', () => {
+            calculateTotal();
+            saveData();
+        });
+    });
+
+    window.addEventListener('load', () => {
+        calculateTotal();
+    });
+</script>

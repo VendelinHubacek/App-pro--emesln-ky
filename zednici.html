@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Zedníci - Ceník prací</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1, h2 {
+            color: #00563b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #f44336;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .input-field {
+            width: 80px;
+            text-align: center;
+        }
+
+        .calculate-btn {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .calculate-btn:hover {
+            background-color: #45a049;
+        }
+
+        .section-title {
+            background-color: #ddd;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: left;
+        }
+
+        #floating-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #fff;
+            border: 2px solid #4CAF50;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            font-size: 18px;
+            color: #333;
+        }
+
+        #floating-total {
+            font-size: 22px;
+            color: #4CAF50;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Zedníci - Ceník prací</h1>
+
+<table>
+    <tr>
+        <th>Fotografie</th>
+        <th>Pracovní úkon</th>
+        <th>Cena</th>
+        <th>Počet (m² / bm / ks / hod)</th>
+        <th>Celková cena</th>
+    </tr>
+
+    <tr><td colspan="5" class="section-title">Zdění</td></tr>
+    <tr><td><img src="obrazek1.jpg" width="100"></td><td>Zdění z cihly obvodové 380 mm</td><td>610 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek2.jpg" width="100"></td><td>Zdění z cihly obvodové 440 mm</td><td>660 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek3.jpg" width="100"></td><td>Zdění z cihly obvodové do tloušťky 500 mm</td><td>730 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek4.jpg" width="100"></td><td>Zdění z cihly plné do tloušťky 70 mm</td><td>380 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek5.jpg" width="100"></td><td>Zdění z cihly plné tloušťky 140 mm</td><td>600 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek6.jpg" width="100"></td><td>Zdění z cihly plné bez omítky naležato tl. 280 mm</td><td>775 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek7.jpg" width="100"></td><td>Zdění z Hess cihly příčka 80 mm</td><td>340 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek8.jpg" width="100"></td><td>Zdění z plné cihly křížkové tl. 115 mm</td><td>370 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek9.jpg" width="100"></td><td>Zdění z cihly příčka tl. 175 mm</td><td>380 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek10.jpg" width="100"></td><td>Zdění z cihly příčka tl. 200 mm</td><td>445 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek11.jpg" width="100"></td><td>Zdění z cihly příčka tl. 240 mm</td><td>480 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek12.jpg" width="100"></td><td>Zdění z cihly příčka tl. 300 mm</td><td>520 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek13.jpg" width="100"></td><td>Zdění z Ytongu tl. 50 mm</td><td>335 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek14.jpg" width="100"></td><td>Zdění z Ytongu tl. 75 mm</td><td>360 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek15.jpg" width="100"></td><td>Zdění z Ytongu tl. 100 mm</td><td>390 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek16.jpg" width="100"></td><td>Zdění z Ytongu tl. 125 mm</td><td>419 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek17.jpg" width="100"></td><td>Zdění z Ytongu tl. 150 mm</td><td>450 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek18.jpg" width="100"></td><td>Zdění z Ytongu tl. 200 mm</td><td>470 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek19.jpg" width="100"></td><td>Zdění z Ytongu tl. 250 mm</td><td>490 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek20.jpg" width="100"></td><td>Zdění z Ytongu tl. 300 mm</td><td>515 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek21.jpg" width="100"></td><td>Zdění z Ytongu tl. 375 mm</td><td>550 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek22.jpg" width="100"></td><td>Zdění ze skleněných luxfer včetně spárování</td><td>1100 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td colspan="5" class="section-title">Omítky</td></tr>
+    <tr><td><img src="obrazek23.jpg" width="100"></td><td>Zpracování stěny</td><td>65 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek24.jpg" width="100"></td><td>Zpracování stropu</td><td>80 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek25.jpg" width="100"></td><td>Ruční omítání stěny vápenná jádrová do 20 mm</td><td>280 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek26.jpg" width="100"></td><td>Ruční omítání stěny vápenná jádrová do 30 mm</td><td>330 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek27.jpg" width="100"></td><td>Ruční omítání stěny vápenná jádrová do 40 mm</td><td>370 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek28.jpg" width="100"></td><td>Ruční omítání stropu vápenná jádrová do 20 mm</td><td>330 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek29.jpg" width="100"></td><td>Ruční omítání stropu vápenná jádrová do 30 mm</td><td>390 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek30.jpg" width="100"></td><td>Ruční omítání špalety vápenná jádrová do 20 mm</td><td>150 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek31.jpg" width="100"></td><td>Penetrace podkladu stěny pod lepidlo</td><td>21 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek32.jpg" width="100"></td><td>Montáž rohové lišty z perlinkou</td><td>40 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek33.jpg" width="100"></td><td>Natažení stěny lepidlem bez perlinky, jedna vrstva</td><td>75 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek34.jpg" width="100"></td><td>Natažení stěny lepidlem s perlinkou, jedna vrstva</td><td>120 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek35.jpg" width="100"></td><td>Natažení stěny lepidlem s perlinkou, dvě vrstvy</td><td>170 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Podlahy</td></tr>
+    <tr><td><img src="obrazek36.jpg" width="100"></td><td>Vyrovnání podkladu samonivelační stěrkou do 5 mm</td><td>160 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek37.jpg" width="100"></td><td>Vyrovnání podkladu samonivelační stěrkou do 10 mm</td><td>190 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek38.jpg" width="100"></td><td>Pokládka kari sítě na podlahu včetně váz. drátu</td><td>100 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek39.jpg" width="100"></td><td>Pokládka polystyrenu na podlahu (1 vrstva)</td><td>30 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek40.jpg" width="100"></td><td>Pokládka izolace IPA na podlahu vč. sváření</td><td>150 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek41.jpg" width="100"></td><td>Nalepení obvodového dilatačního Mirelon pásku</td><td>20 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek42.jpg" width="100"></td><td>Betonování podlahy do 30 mm</td><td>175 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek43.jpg" width="100"></td><td>Betonování podlahy do 50 mm</td><td>230 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek44.jpg" width="100"></td><td>Betonování podlahy do 80 mm</td><td>260 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek45.jpg" width="100"></td><td>Betonování podlahy do 100 mm</td><td>290 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td colspan="5" class="section-title">Sekání šliců</td></tr>
+    <tr><td><img src="obrazek46.jpg" width="100"></td><td>Sekání šliců v cihle do 30x30 mm</td><td>65 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek47.jpg" width="100"></td><td>Sekání šliců v cihle do 50x50 mm</td><td>75 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek48.jpg" width="100"></td><td>Sekání šliců v cihle do 100x50 mm</td><td>125 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek49.jpg" width="100"></td><td>Sekání šliců v cihle do 200x50 mm</td><td>150 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek50.jpg" width="100"></td><td>Zahození šliců do 30x30 mm</td><td>45 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek51.jpg" width="100"></td><td>Zahození šliců do 50x50 mm</td><td>65 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek52.jpg" width="100"></td><td>Zahození šliců do 100x50 mm</td><td>90 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek53.jpg" width="100"></td><td>Zahození šliců do 200x50 mm</td><td>140 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek54.jpg" width="100"></td><td>Vybetonování šliců v podlaze do 30x30 mm</td><td>35 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek55.jpg" width="100"></td><td>Vybetonování šliců v podlaze do 50x50 mm</td><td>55 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek56.jpg" width="100"></td><td>Vybetonování šliců v podlaze do 200x50 mm</td><td>95 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Překlady</td></tr>
+    <tr><td><img src="obrazek57.jpg" width="100"></td><td>Uložení ocelového profilu L</td><td>80 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek58.jpg" width="100"></td><td>Uložení nenosného překlad Ytong</td><td>150 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek59.jpg" width="100"></td><td>Uložení ocelového nosníku</td><td>260 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek60.jpg" width="100"></td><td>Uložení železobetonového překladu</td><td>95 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Ostatní práce</td></tr>
+    <tr><td><img src="obrazek61.jpg" width="100"></td><td>Osazení omítkářského rohu</td><td>60 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek62.jpg" width="100"></td><td>Osazení a zazdění ocelové zárubně</td><td>910 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek63.jpg" width="100"></td><td>Osazení a zazdění pouzdra pro posuvné dveře</td><td>1050 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek64.jpg" width="100"></td><td>Podezdívka vany klasické</td><td>1000 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek65.jpg" width="100"></td><td>Podezdívka vany rohové</td><td>1500 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek66.jpg" width="100"></td><td>Obezdívka a podezdívka vany klasické</td><td>1300 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek67.jpg" width="100"></td><td>Obezdívka a podezdívka vany rohové</td><td>2000 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek68.jpg" width="100"></td><td>Broušení nového štuku</td><td>15 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek69.jpg" width="100"></td><td>Obezdění Geberitu</td><td>1250 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek70.jpg" width="100"></td><td>Přesun materiálu mimo patro realizace</td><td>300 Kč / hod</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td colspan="5" class="section-title">Zateplení fasád</td></tr>
+    <tr><td><img src="obrazek71.jpg" width="100"></td><td>Montáž zakládací lišty pro zateplovací systém</td><td>60 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek72.jpg" width="100"></td><td>Zateplení fasády polystyrenem včetně omítky</td><td>560 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek73.jpg" width="100"></td><td>Zateplení fasády minerální vatou včetně omítky</td><td>610 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek74.jpg" width="100"></td><td>Zateplení špalety polystyrenem včetně omítky</td><td>395 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek75.jpg" width="100"></td><td>Zateplení špalety minerální vatou včetně omítky</td><td>450 Kč / bm</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Hodinové sazby</td></tr>
+    <tr><td><img src="obrazek76.jpg" width="100"></td><td>Odborné zednické práce</td><td>375 Kč / hod</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="obrazek77.jpg" width="100"></td><td>Pomocné zednické práce</td><td>275 Kč / hod</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+</table>
+
+<button class="calculate-btn" onclick="goToNabidka()">Přejít na novou nabídku</button>
+<button class="calculate-btn" onclick="window.location.href='cenik.html'">Zvolit jiné řemeslo</button>
+
+<div id="grand-total" style="font-size: 24px; font-weight: bold; margin-top: 30px;">
+    Celková cena všech prací: 0 Kč
+</div>
+
+<div id="floating-box">
+    <strong>Celkem:</strong>
+    <div id="floating-total">0 Kč</div>
+</div>
+
+<script>
+    function calculateTotal() {
+        const rows = document.querySelectorAll("table tr");
+        let grandTotal = 0;
+
+        rows.forEach(row => {
+            const cenaBunka = row.cells[2]?.textContent;
+            const cena = cenaBunka ? parseFloat(cenaBunka.replace(/[^\d.]/g, '')) : 0;
+            const mnozstvi = parseFloat(row.cells[3]?.querySelector('input')?.value) || 0;
+            const celkem = cena * mnozstvi;
+
+            const cil = row.cells[4]?.querySelector('.total-price');
+            if (cil) {
+                cil.textContent = celkem.toFixed(2) + ' Kč';
+            }
+
+            if (!isNaN(celkem)) {
+                grandTotal += celkem;
+            }
+        });
+
+        const grandTotalElement = document.getElementById("grand-total");
+        if (grandTotalElement) {
+            grandTotalElement.textContent = "Celková cena všech prací: " + grandTotal.toFixed(2) + " Kč";
+        }
+
+        const floatingTotal = document.getElementById("floating-total");
+        if (floatingTotal) {
+            floatingTotal.textContent = grandTotal.toFixed(2) + " Kč";
+        }
+    }
+
+    function saveData() {
+        const rows = document.querySelectorAll("table tr");
+        let data = [];
+
+        rows.forEach(row => {
+            const name = row.cells[1]?.textContent;
+            const price = row.cells[2]?.textContent;
+            const quantity = row.cells[3]?.querySelector('input')?.value;
+            const total = row.cells[4]?.querySelector('.total-price')?.textContent;
+
+            if (name && price && quantity > 0) {
+                data.push({
+                    name: name.trim(),
+                    price: price.trim(),
+                    quantity: quantity,
+                    total: total.trim()
+                });
+            }
+        });
+
+        localStorage.setItem('nabidkaData', JSON.stringify(data));
+    }
+
+    function goToNabidka() {
+        saveData();
+        window.location.href = 'novanabidka.html';
+    }
+
+    document.querySelectorAll('.input-field').forEach(input => {
+        input.addEventListener('input', () => {
+            calculateTotal();
+            saveData();
+        });
+    });
+
+    window.addEventListener('load', () => {
+        calculateTotal();
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sádrokartonáři - Ceník prací</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #00563b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #f44336;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .input-field {
+            width: 80px;
+            text-align: center;
+        }
+
+        .calculate-btn {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .calculate-btn:hover {
+            background-color: #45a049;
+        }
+
+        .section-title {
+            background-color: #ddd;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: left;
+        }
+
+        #floating-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #fff;
+            border: 2px solid #4CAF50;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            font-size: 18px;
+            color: #333;
+        }
+
+        #floating-total {
+            font-size: 22px;
+            color: #4CAF50;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Sádrokartonáři - Ceník prací</h1>
+
+<table>
+    <tr>
+        <th>Fotografie</th>
+        <th>Pracovní úkon</th>
+        <th>Cena</th>
+        <th>Počet</th>
+        <th>Celková cena</th>
+    </tr>
+
+    <tr><td colspan="5" class="section-title">Sádrokartonové podhledy</td></tr>
+    <tr><td>-</td><td>Podhled rovný (1x záklop 12,5mm, bez izolace)</td><td>337 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Podhled rovný (1x záklop 15mm, bez izolace)</td><td>352 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Podhled rovný (2x záklop 12,5mm, bez izolace)</td><td>403 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Podhled šikmý (1x záklop 12,5mm, bez izolace)</td><td>362 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Podhled šikmý (1x záklop 15mm, bez izolace)</td><td>378 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Podhled šikmý (2x záklop 12,5mm, bez izolace)</td><td>438 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Podhled rovný mřížový</td><td>222 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Podhled šikmý mřížový</td><td>245 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Podhled rovný akustický</td><td>455 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Podhled šikmý akustický</td><td>482 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td>-</td><td>Podhled obloukový (2x záklop - RIFLEX 6mm)</td><td>812 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Podhled montovaný přímo na OSB desky (1x záklop)</td><td>213 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Montáž tepelné izolace podhledů (1 vrstva)</td><td>32 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Montáž tepelné izolace šikmin (1 vrstva)</td><td>32 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Příplatek za opláštění podhledu a šikmin těžší deskou</td><td>19 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Příčky</td></tr>
+    <tr><td>-</td><td>Příčka (1x záklop z každé strany, bez izolace)</td><td>365 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Příčka (2x záklop z každé strany, bez izolace)</td><td>528 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Příčka (3x záklop z každé strany, bez izolace)</td><td>669 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Příčka mezibytová (2x KCE, 2x záklop, bez izolace)</td><td>679 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Příčka bezpečnostní (2x záklop, jednostraně plech)</td><td>559 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Příčka bezpečnostní (2x záklop, oboustraně plech)</td><td>614 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Příčka bezpečnostní (2x KCE, 2x záklop, oboustraně plech)</td><td>677 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Příčka oblouková (2x RIFLEX 6mm z každé strany)</td><td>918 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Příčka oblouková (3x RIFLEX 6mm z každé strany)</td><td>1 055 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Montáž tepelné izolace příček (1 vrstva)</td><td>22 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Příplatek za opláštění příčky hutnější deskou</td><td>19 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td colspan="5" class="section-title">Předstěny</td></tr>
+    <tr><td>-</td><td>Předstěna volně stojící (1x záklop, bez izolace)</td><td>279 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Předstěna volně stojící (2x záklop, bez izolace)</td><td>355 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Předstěna kotvená (1x záklop, bez izolace)</td><td>289 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Předstěna kotvená (2x záklop, bez izolace)</td><td>367 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Předstěna montovaná přímo na OSB desku (1x záklop)</td><td>148 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Montáž tepelné izolace předstěn (1 vrstva)</td><td>22 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td>-</td><td>Příplatek za opláštění předstěny hutnější deskou</td><td>13 Kč / m²</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Hodinová sazba</td></tr>
+    <tr><td>-</td><td>Sádrokartonářské montážní práce</td><td>350 Kč / hod</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+</table>
+
+<button class="calculate-btn" onclick="goToNabidka()">Přejít na novou nabídku</button>
+<button class="calculate-btn" onclick="window.location.href='cenik.html'">Zvolit jiné řemeslo</button>
+
+<div id="grand-total" style="font-size: 24px; font-weight: bold; margin-top: 30px;">
+    Celková cena všech prací: 0 Kč
+</div>
+
+<div id="floating-box">
+    <strong>Celkem:</strong>
+    <div id="floating-total">0 Kč</div>
+</div>
+
+<script>
+    function calculateTotal() {
+        const rows = document.querySelectorAll("table tr");
+        let grandTotal = 0;
+
+        rows.forEach(row => {
+            const cenaBunka = row.cells[2]?.textContent;
+            const cena = cenaBunka ? parseFloat(cenaBunka.replace(/[^\d.]/g, '')) : 0;
+            const mnozstvi = parseFloat(row.cells[3]?.querySelector('input')?.value) || 0;
+            const celkem = cena * mnozstvi;
+
+            const cil = row.cells[4]?.querySelector('.total-price');
+            if (cil) {
+                cil.textContent = celkem.toFixed(2) + ' Kč';
+            }
+
+            if (!isNaN(celkem)) {
+                grandTotal += celkem;
+            }
+        });
+
+        document.getElementById("grand-total").textContent = "Celková cena všech prací: " + grandTotal.toFixed(2) + " Kč";
+        document.getElementById("floating-total").textContent = grandTotal.toFixed(2) + " Kč";
+    }
+
+    function saveData() {
+        const rows = document.querySelectorAll("table tr");
+        let data = [];
+
+        rows.forEach(row => {
+            const name = row.cells[1]?.textContent;
+            const price = row.cells[2]?.textContent;
+            const quantity = row.cells[3]?.querySelector('input')?.value;
+            const total = row.cells[4]?.querySelector('.total-price')?.textContent;
+
+            if (name && price && quantity > 0) {
+                data.push({
+                    name: name.trim(),
+                    price: price.trim(),
+                    quantity: quantity,
+                    total: total.trim()
+                });
+            }
+        });
+
+        localStorage.setItem('nabidkaData', JSON.stringify(data));
+    }
+
+    function goToNabidka() {
+        saveData();
+        window.location.href = 'novanabidka.html';
+    }
+
+    document.querySelectorAll('.input-field').forEach(input => {
+        input.addEventListener('input', () => {
+            calculateTotal();
+            saveData();
+        });
+    });
+
+    window.addEventListener('load', () => {
+        calculateTotal();
+    });
+</script>
+
+</body>
+</html>

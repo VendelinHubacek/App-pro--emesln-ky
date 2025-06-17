@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Instalatéři - Ceník prací</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1, h2 {
+            color: #00563b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #f44336;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .input-field {
+            width: 80px;
+            text-align: center;
+        }
+
+        .calculate-btn {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .calculate-btn:hover {
+            background-color: #45a049;
+        }
+
+        .section-title {
+            background-color: #ddd;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: left;
+        }
+
+        #floating-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #fff;
+            border: 2px solid #4CAF50;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            font-size: 18px;
+            color: #333;
+        }
+
+        #floating-total {
+            font-size: 22px;
+            color: #4CAF50;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Instalatéři - Ceník prací</h1>
+
+<table>
+    <tr>
+        <th>Fotografie</th>
+        <th>Pracovní úkon</th>
+        <th>Cena</th>
+        <th>Počet (m² / bm / ks / hod)</th>
+        <th>Celková cena</th>
+    </tr>
+
+    <tr><td colspan="5" class="section-title">Sekání šliců (drážek)</td></tr>
+    <tr><td><img src="inst1.jpg" width="100"></td><td>Sekání šlicu v ytongu (do šíře 50mm, do hl.50mm)</td><td>75 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst2.jpg" width="100"></td><td>Sekání šlicu v ytongu (do šíře 100mm, do hl.50mm)</td><td>125 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst3.jpg" width="100"></td><td>Sekání šlicu v ytongu (do šíře 200mm, do hl.50mm)</td><td>150 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst4.jpg" width="100"></td><td>Sekání šlicu v ytongu (do šíře 100mm, do hl.100mm)</td><td>150 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst5.jpg" width="100"></td><td>Sekání šlicu v cihle (do šíře 50mm, do hl.50mm)</td><td>75 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst6.jpg" width="100"></td><td>Sekání šlicu v cihle (do šíře 100mm, do hl.50mm)</td><td>125 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst7.jpg" width="100"></td><td>Sekání šlicu v cihle (do šíře 200mm, do hl.50mm)</td><td>140 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst8.jpg" width="100"></td><td>Sekání šlicu v cihle (do šíře 100mm, do hl.100mm)</td><td>150 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst9.jpg" width="100"></td><td>Sekání šlicu v betonu (do šíře 50mm, do hl.50mm)</td><td>125 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst10.jpg" width="100"></td><td>Sekání šlicu v betonu (do šíře 100mm, do hl.50mm)</td><td>190 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst11.jpg" width="100"></td><td>Sekání šlicu v betonu (do šíře 200mm, do hl.50mm)</td><td>200 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Rozvody vody</td></tr>
+    <tr><td><img src="inst12.jpg" width="100"></td><td>Usazení PPR trubky do pr.25mm</td><td>108 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst13.jpg" width="100"></td><td>Usazení PPR trubky do pr.40mm</td><td>129 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst14.jpg" width="100"></td><td>Montáž PPR spojkového nátrubku do pr.25mm</td><td>63 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst15.jpg" width="100"></td><td>Montáž PPR spojkového nátrubku do pr.40mm</td><td>79 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst16.jpg" width="100"></td><td>Montáž PPR kolena do pr.25mm</td><td>63 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst17.jpg" width="100"></td><td>Montáž PPR kolena do pr.40mm</td><td>79 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst18.jpg" width="100"></td><td>Montáž PPR odbočky do pr.25mm</td><td>78 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst19.jpg" width="100"></td><td>Montáž PPR odbočky do pr.40mm</td><td>93 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst20.jpg" width="100"></td><td>Montáž PPR nástěnky pro baterii (ve zdi vč. sádrování)</td><td>218 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst21.jpg" width="100"></td><td>Montáž PPR nástěnky pro baterii (v sádrokartonu vč. uchycení)</td><td>198 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst22.jpg" width="100"></td><td>Montáž PPR nástěnky pro rohový ventil (ve zdi vč. sádrování)</td><td>183 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst23.jpg" width="100"></td><td>Montáž PPR nástěnky pro rohový ventil (v sádrokartonu vč. uchycení)</td><td>162 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst24.jpg" width="100"></td><td>Přechod z PPR na ocel, nebo měď</td><td>129 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst25.jpg" width="100"></td><td>Uchycení potrubí objímkami</td><td>35 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst26.jpg" width="100"></td><td>Uchycení potrubí sádrou</td><td>33 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Rozvody odpadů</td></tr>
+    <tr><td><img src="inst27.jpg" width="100"></td><td>Uložení odpadní trubky PP-HT s hrdlem do pr.75mm</td><td>64 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst28.jpg" width="100"></td><td>Uložení odpadní trubky PP-HT s hrdlem do pr.110mm</td><td>92 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst29.jpg" width="100"></td><td>Uložení odpadní trubky PP-HT s hrdlem do pr.150mm</td><td>122 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst30.jpg" width="100"></td><td>Montáž kolena PP-HT do pr.75mm</td><td>47 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst31.jpg" width="100"></td><td>Montáž odbočky PP-HT do pr.75mm</td><td>64 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst32.jpg" width="100"></td><td>Montáž kolena PP-HT do pr.110mm</td><td>53 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst33.jpg" width="100"></td><td>Montáž odbočky PP-HT do pr.110mm</td><td>70 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst34.jpg" width="100"></td><td>Přerušení stoupačky a vložení odbočky PP-HT</td><td>934 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst35.jpg" width="100"></td><td>Navrtávka odpadní trubky do pr.75mm</td><td>273 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst36.jpg" width="100"></td><td>Navrtávka stoupačky do pr.110mm</td><td>330 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst37.jpg" width="100"></td><td>Usazení a připojení odtokového žlabu do 800mm</td><td>859 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst38.jpg" width="100"></td><td>Usazení a připojení podlahové gule</td><td>595 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Izolace potrubí</td></tr>
+
+    <tr><td><img src="inst39.jpg" width="100"></td><td>Izolace mirelon do pr. trubky 40mm</td><td>13 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst40.jpg" width="100"></td><td>Izolace mirelon tl. kolena, T kus do pr. trubky 40mm</td><td>59 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst41.jpg" width="100"></td><td>Izolace trubky do pr. 75mm</td><td>23 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst42.jpg" width="100"></td><td>Izolace trubky do pr. 110mm</td><td>44 Kč / mb</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst43.jpg" width="100"></td><td>Izolace kolena, T kusu do pr. trubky 110mm</td><td>94 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td colspan="5" class="section-title">Kompletace</td></tr>
+
+    <tr><td><img src="inst44.jpg" width="100"></td><td>Montáž geberitu pro WC (přikotvení, připojení vody a odpadu)</td><td>834 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst45.jpg" width="100"></td><td>Montáž závěsného WC včetně tlačítka</td><td>668 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst46.jpg" width="100"></td><td>Montáž závěsného WC bez tlačítka</td><td>552 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst47.jpg" width="100"></td><td>Montáž WC kombi (sestavení, usazení, zapojení)</td><td>992 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst48.jpg" width="100"></td><td>Montáž pisoáru (usazení, zapojení)</td><td>662 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst49.jpg" width="100"></td><td>Montáž bidetu</td><td>965 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst50.jpg" width="100"></td><td>Montáž baterie stojánkové</td><td>232 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst51.jpg" width="100"></td><td>Montáž baterie dřezové</td><td>232 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst52.jpg" width="100"></td><td>Montáž baterie stojánkové s bidetovou sprškou</td><td>257 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst53.jpg" width="100"></td><td>Montáž baterie nástěnné</td><td>244 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst54.jpg" width="100"></td><td>Montáž baterie vanové včetně sprchy</td><td>310 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Ostatní práce</td></tr>
+
+    <tr><td><img src="inst55.jpg" width="100"></td><td>Zapojení průtokového ohřívače vody do 15l</td><td>424 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst56.jpg" width="100"></td><td>Přikotvení a zapojení bojleru na zeď (60–100l)</td><td>1 365 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst57.jpg" width="100"></td><td>Přikotvení a zapojení bojleru na zeď (110–180l)</td><td>1 797 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst58.jpg" width="100"></td><td>Montáž pojistkového ventilu</td><td>352 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst59.jpg" width="100"></td><td>Zapojení pračky</td><td>205 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst60.jpg" width="100"></td><td>Zapojení myčky</td><td>205 Kč / ks</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst61.jpg" width="100"></td><td>Přesun materiálu (pokud není připraven v patře realizace)</td><td>250 Kč / hod</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Tlakové zkoušky</td></tr>
+
+    <tr><td><img src="inst62.jpg" width="100"></td><td>Tlaková zkouška tl. potrubí</td><td>294 Kč / hod</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst63.jpg" width="100"></td><td>Zkouška těsnosti kanalizace vodou do DN 125</td><td>294 Kč / hod</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst64.jpg" width="100"></td><td>Proplach potrubí</td><td>294 Kč / hod</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <tr><td><img src="inst65.jpg" width="100"></td><td>Vypracování dokumentu o tlakové zkoušce</td><td>625 Kč / kpl</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+
+    <tr><td colspan="5" class="section-title">Hodinová sazba</td></tr>
+
+    <tr><td><img src="inst66.jpg" width="100"></td><td>Instalatérské práce v hodinové sazbě</td><td>350 Kč / hod</td><td><input type="number" class="input-field" onchange="calculateTotal()"></td><td><span class="total-price">0 Kč</span></td></tr>
+    <!DOCTYPE html>
+    <html lang="cs">
+</table>
+    
+    <button class="calculate-btn" onclick="goToNabidka()">Přejít na novou nabídku</button>
+    <button class="calculate-btn" onclick="window.location.href='cenik.html'">Zvolit jiné řemeslo</button>
+    
+    <div id="grand-total" style="font-size: 24px; font-weight: bold; margin-top: 30px;">
+        Celková cena všech prací: 0 Kč
+    </div>
+    
+    <div id="floating-box">
+        <strong>Celkem:</strong>
+        <div id="floating-total">0 Kč</div>
+    </div>
+    
+    <script>
+        function calculateTotal() {
+            const rows = document.querySelectorAll("table tr");
+            let grandTotal = 0;
+    
+            rows.forEach(row => {
+                const cenaBunka = row.cells[2]?.textContent;
+                const cena = cenaBunka ? parseFloat(cenaBunka.replace(/[^\d.]/g, '')) : 0;
+                const mnozstvi = parseFloat(row.cells[3]?.querySelector('input')?.value) || 0;
+                const celkem = cena * mnozstvi;
+    
+                const cil = row.cells[4]?.querySelector('.total-price');
+                if (cil) {
+                    cil.textContent = celkem.toFixed(2) + ' Kč';
+                }
+    
+                if (!isNaN(celkem)) {
+                    grandTotal += celkem;
+                }
+            });
+    
+            const grandTotalElement = document.getElementById("grand-total");
+            if (grandTotalElement) {
+                grandTotalElement.textContent = "Celková cena všech prací: " + grandTotal.toFixed(2) + " Kč";
+            }
+    
+            const floatingTotal = document.getElementById("floating-total");
+            if (floatingTotal) {
+                floatingTotal.textContent = grandTotal.toFixed(2) + " Kč";
+            }
+        }
+    
+        function saveData() {
+            const rows = document.querySelectorAll("table tr");
+            let data = [];
+    
+            rows.forEach(row => {
+                const name = row.cells[1]?.textContent;
+                const price = row.cells[2]?.textContent;
+                const quantity = row.cells[3]?.querySelector('input')?.value;
+                const total = row.cells[4]?.querySelector('.total-price')?.textContent;
+    
+                if (name && price && quantity > 0) {
+                    data.push({
+                        name: name.trim(),
+                        price: price.trim(),
+                        quantity: quantity,
+                        total: total.trim()
+                    });
+                }
+            });
+    
+            localStorage.setItem('nabidkaData', JSON.stringify(data));
+        }
+    
+        function goToNabidka() {
+            saveData();
+            window.location.href = 'novanabidka.html';
+        }
+    
+        document.querySelectorAll('.input-field').forEach(input => {
+            input.addEventListener('input', () => {
+                calculateTotal();
+                saveData();
+            });
+        });
+    
+        window.addEventListener('load', () => {
+            calculateTotal();
+        });
+    </script>
+    
+    </body>
+    </html>
+    

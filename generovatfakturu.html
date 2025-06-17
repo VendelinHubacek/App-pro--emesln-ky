@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Generovat fakturu</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Generovat fakturu</h1>
+
+        <form id="invoiceForm">
+            <label for="company">Název firmy:</label>
+            <input type="text" id="company" required>
+
+            <label for="client">Zákazník:</label>
+            <input type="text" id="client" required>
+
+            <label for="service">Popis služby:</label>
+            <input type="text" id="service" required>
+
+            <label for="price">Cena (Kč):</label>
+            <input type="number" id="price" required>
+
+            <label for="date">Datum vystavení:</label>
+            <input type="date" id="date" required>
+
+            <label for="dueDate">Datum splatnosti:</label>
+            <input type="date" id="dueDate" required>
+
+            <label for="email">E-mail zákazníka:</label>
+            <input type="email" id="email" required>
+
+            <button type="submit">Vytvořit fakturu</button>
+        </form>
+
+        <div id="invoiceResult"></div>
+
+        <div class="buttons">
+            <button type="button" onclick="downloadPDF()">Stáhnout PDF</button>
+            <button type="button" onclick="window.print()">Tisk</button>
+            <button type="button" onclick="sendEmail()">Odeslat e-mailem</button>
+            <button onclick="window.location.href='index.html'">Zpět na hlavní stránku</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+
+    <script>
+        // Po načtení stránky vyplnit klienta a e-mail z localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            const ulozenyZakaznik = JSON.parse(localStorage.getItem('ulozenyZakaznik'));
+            if (ulozenyZakaznik) {
+                document.getElementById('client').value = ulozenyZakaznik.name;
+                document.getElementById('email').value = ulozenyZakaznik.email;
+            }
+        });
+    </script>
+</body>
+
+</html>

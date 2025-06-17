@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vygenerovaná smlouva</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    @media print {
+      #akce {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container wide">
+    <h1>Pracovní smlouva o dílo</h1>
+    <div id="vysledek" class="smlouva"></div>
+
+    <div id="akce">
+      <button onclick="stahnoutPDF()">Stáhnout PDF</button>
+      <button onclick="window.print()">Tisk</button>
+      <button onclick="odeslatEmail()">Odeslat e-mailem</button>
+      <button onclick="window.location.href='predavaciprotokol.html'">Přejít na předávací protokol</button>
+      <button onclick="window.location.href='index.html'">Zpět na hlavní stránku</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

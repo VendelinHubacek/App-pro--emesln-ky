@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Databáze zákazníků</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <h1>Databáze zákazníků</h1>
+
+  <form id="formular">
+    <input type="text" id="jmeno" placeholder="Jméno zákazníka" required>
+    <input type="text" id="adresa" placeholder="Adresa" required>
+    <input type="text" id="ico" placeholder="IČO">
+    <input type="text" id="telefon" placeholder="Telefon">
+    <input type="email" id="email" placeholder="E-mail">
+    <button type="submit">Uložit zákazníka</button>
+  </form>
+
+  <h2>Seznam zákazníků</h2>
+  <ul id="seznamZakazniku"></ul>
+
+  <script src="js/zakaznici.js"></script>
+</body>
+</html>

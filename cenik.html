@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ceník prací</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            color: #00563b;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: white; /* Bílé pozadí */
+            color: #f44336; /* Červené písmo */
+            border: 2px solid #f44336; /* Červený rámeček */
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+            width: 250px;
+        }
+
+        button:hover {
+            background-color: #4CAF50; /* Zelené pozadí při najetí */
+            color: white; /* Bílé písmo při najetí */
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* Tlačítka pro pokračování na novou nabídku a zpět na hlavní stránku */
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            text-align: center;
+        }
+
+        .navigation-buttons button {
+            padding: 10px 20px;
+            background-color: #4CAF50; /* Zelené pozadí */
+            color: white; /* Bílé písmo */
+            border: none; /* Bez rámečku */
+            border-radius: 25px; /* Oválný tvar */
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+            width: 250px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navigation-buttons button:hover {
+            background-color: #45a049; /* Tmavší zelené pozadí při najetí */
+            color: white; /* Bílé písmo při najetí */
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>Ceník prací</h1>
+
+<div class="button-container">
+    <button onclick="window.location.href='obkladaci.html'">Obkladači</button>
+    <button onclick="window.location.href='zednici.html'">Zedníci</button>
+    <button onclick="window.location.href='klempiri.html'">Klempíři</button>
+    <button onclick="window.location.href='truhlari.html'">Truhláři</button>
+    <button onclick="window.location.href='tesari.html'">Tesaři</button>
+    <button onclick="window.location.href='elektromonteri.html'">Elektromontéři</button>
+    <button onclick="window.location.href='instalateri.html'">Instalatéři</button>
+    <button onclick="window.location.href='topenari.html'">Topenáři</button>
+    <button onclick="window.location.href='vzduchotechnici.html'">Vzduchotechnici</button>
+    <button onclick="window.location.href='maliri.html'">Malíři</button>
+    <button onclick="window.location.href='demontaznici.html'">Demontážníci</button>
+    <button onclick="window.location.href='fasadnici.html'">Fasádníci</button>
+    <button onclick="window.location.href='sadrokartonari.html'">Sádrokartonáři</button>
+    <button onclick="window.location.href='pokryvaci.html'">Pokrývači</button>
+    <button onclick="window.location.href='architekti.html'">Architekti</button>
+    <button onclick="window.location.href='projektantiastavebnidozor.html'">Projektanti a stavební dozor</button>
+    <button onclick="window.location.href='zakladatelestaveb.html'">Zakladatelé staveb</button>
+    <button onclick="window.location.href='dlazdici.html'">Dlaždiči</button>
+    <button onclick="window.location.href='plynari.html'">Plynáři</button>
+    <button onclick="window.location.href='kominici.html'">Kominíci</button>
+    <button onclick="window.location.href='ostatnistavebniprace.html'">Ostatní stavební práce</button>
+    <button onclick="window.location.href='podlahari.html'">Podlaháři</button>
+    <button onclick="window.location.href='lakyrnici.html'">Lakýrníci</button>
+</div>
+
+<!-- Tlačítka pro pokračování na novou nabídku a zpět na hlavní stránku -->
+<div class="navigation-buttons">
+    <button onclick="window.location.href='novanabidka.html'">Pokračovat na novou nabídku</button>
+    <button onclick="window.location.href='index.html'">Zpět na hlavní stránku</button>
+</div>
+
+</body>
+</html>
