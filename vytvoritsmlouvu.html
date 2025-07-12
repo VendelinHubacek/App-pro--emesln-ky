@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Vytvořit pracovní smlouvu</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    .wide { max-width: 900px; margin: auto; }
+    .hidden { display: none; }
+    .smlouva-vystup {
+      background: #fff;
+      padding: 20px;
+      border: 1px solid #ccc;
+      margin-top: 20px;
+      white-space: normal;
+    }
+    #smlouvaFinalHTML h2, h3 { margin-top: 1em; }
+  </style>
 </head>
 <body>
   <div class="container wide">
@@ -12,56 +25,149 @@
 
     <form id="smlouvaForm">
       <label>Zhotovitel:</label>
-      <input type="text" id="zhotovitel" required>
+      <input type="text" id="zhotovitel" required />
 
       <label>Objednatel:</label>
-      <input type="text" id="objednatel" required>
+      <input type="text" id="objednatel" required />
 
       <label>Předmět práce:</label>
-      <input type="text" id="prace" required>
+      <input type="text" id="prace" required />
 
       <label>Cena:</label>
-      <input type="text" id="cena" required>
+      <input type="text" id="cena" required />
 
       <label>Datum zahájení:</label>
-      <input type="date" id="datumOd" required>
+      <input type="date" id="datumOd" required />
 
       <label>Datum dokončení:</label>
-      <input type="date" id="datumDo" required>
+      <input type="date" id="datumDo" required />
 
       <label>Poznámky:</label>
       <textarea id="poznamky"></textarea>
 
       <h3>Volitelné podmínky:</h3>
-      <label><input type="checkbox" id="zaskrtnoutVse"> Zaškrtnout všechny</label><br>
+      <label><input type="checkbox" id="zaskrtnoutVse" /> Zaškrtnout všechny</label><br />
+      <label><input type="checkbox" class="klauzule" value="elektrina" /> Objednatel zajistí elektriku</label><br />
+      <label><input type="checkbox" class="klauzule" value="voda" /> Objednatel zajistí vodu</label><br />
+      <label><input type="checkbox" class="klauzule" value="hygiena" /> Objednatel zajistí hygienické zázemí</label><br />
+      <label><input type="checkbox" class="klauzule" value="pristup" /> Objednatel zajistí přístup ke stavbě</label><br />
+      <label><input type="checkbox" class="klauzule" value="pokuta" /> Smluvní pokuta za prodlení</label><br />
+      <label><input type="checkbox" class="klauzule" value="odstoupeni" /> Pokuta za neoprávněné odstoupení</label><br />
+      <label><input type="checkbox" class="klauzule" value="skoda" /> Náhrada škody</label><br />
+      <label><input type="checkbox" class="klauzule" value="uklid" /> Poplatek za úklid</label><br />
+      <label><input type="checkbox" class="klauzule" value="zaruka" /> Záruka na dílo</label><br />
+      <label><input type="checkbox" class="klauzule" value="mlcenlivost" /> Mlčenlivost</label><br /><br />
 
-      <label><input type="checkbox" class="klauzule" value="elektrina"> Objednatel zajistí elektriku</label><br>
-      <label><input type="checkbox" class="klauzule" value="voda"> Objednatel zajistí vodu</label><br>
-      <label><input type="checkbox" class="klauzule" value="hygiena"> Objednatel zajistí hygienické zázemí</label><br>
-      <label><input type="checkbox" class="klauzule" value="pristup"> Objednatel zajistí přístup ke stavbě</label><br>
-      <label><input type="checkbox" class="klauzule" value="pokuta"> Smluvní pokuta za prodlení</label><br>
-      <label><input type="checkbox" class="klauzule" value="odstoupeni"> Pokuta za neoprávněné odstoupení</label><br>
-      <label><input type="checkbox" class="klauzule" value="skoda"> Náhrada škody</label><br>
-      <label><input type="checkbox" class="klauzule" value="uklid"> Poplatek za úklid</label><br>
-      <label><input type="checkbox" class="klauzule" value="zaruka"> Záruka na dílo</label><br>
-      <label><input type="checkbox" class="klauzule" value="mlcenlivost"> Mlčenlivost</label><br><br>
+      <label>Zadejte e-mail objednatele:</label>
+      <input type="email" id="email" placeholder="např. zakaznik@email.cz" /><br /><br />
 
-      <button type="submit">Vytvořit pracovní smlouvu</button><br><br>
+      <button type="submit">Vytvořit pracovní smlouvu</button><br /><br />
       <button type="button" onclick="zpetNaHlavni()">Zpět na hlavní stránku</button>
       <button type="button" onclick="dalsiKrok('predavaciprotokol.html')">Další krok</button>
     </form>
+
+    <div id="vystupSmlouvy" class="smlouva-vystup hidden">
+      <div id="smlouvaFinalHTML"></div><br />
+      <button onclick="stahnoutPDF()">📄 Stáhnout jako PDF</button>
+      <button onclick="odeslatEmailem()">✉️ Odeslat e-mailem</button>
+    </div>
   </div>
 
-  <script src="js/script.js"></script>
-
   <script>
-    // Po načtení stránky vyplnit objednatele z localStorage
-    document.addEventListener('DOMContentLoaded', () => {
-      const ulozenyZakaznik = JSON.parse(localStorage.getItem('ulozenyZakaznik'));
+    document.addEventListener("DOMContentLoaded", () => {
+      const ulozenyZakaznik = JSON.parse(localStorage.getItem("ulozenyZakaznik"));
       if (ulozenyZakaznik) {
-        document.getElementById('objednatel').value = ulozenyZakaznik.name;
+        document.getElementById("objednatel").value = ulozenyZakaznik.name;
       }
+
+      document.getElementById("zaskrtnoutVse").addEventListener("change", function () {
+        document.querySelectorAll(".klauzule").forEach((checkbox) => {
+          checkbox.checked = this.checked;
+        });
+      });
+
+      document.getElementById("smlouvaForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const z = document.getElementById("zhotovitel").value;
+        const o = document.getElementById("objednatel").value;
+        const p = document.getElementById("prace").value;
+        const c = document.getElementById("cena").value;
+        const od = document.getElementById("datumOd").value;
+        const do_ = document.getElementById("datumDo").value;
+        const poz = document.getElementById("poznamky").value;
+        const klauzule = Array.from(document.querySelectorAll(".klauzule:checked")).map(el => el.value);
+
+        let podminkyHTML = "";
+        if (klauzule.includes("elektrina")) podminkyHTML += "<li>Objednatel zajistí přívod elektrické energie.</li>";
+        if (klauzule.includes("voda")) podminkyHTML += "<li>Objednatel zajistí přístup k vodě.</li>";
+        if (klauzule.includes("hygiena")) podminkyHTML += "<li>Objednatel zajistí hygienické zázemí pro pracovníky.</li>";
+        if (klauzule.includes("pristup")) podminkyHTML += "<li>Objednatel umožní přístup ke stavbě.</li>";
+        if (klauzule.includes("pokuta")) podminkyHTML += "<li>Smluvní pokuta za prodlení s platbou: 0,05 % denně.</li>";
+        if (klauzule.includes("odstoupeni")) podminkyHTML += "<li>Pokuta za neoprávněné odstoupení: 30 % z ceny neprovedených prací.</li>";
+        if (klauzule.includes("skoda")) podminkyHTML += "<li>Náhrada škody způsobené zmařením zakázky.</li>";
+        if (klauzule.includes("uklid")) podminkyHTML += "<li>Účtován poplatek za úklid, pokud nebude zajištěn.</li>";
+        if (klauzule.includes("zaruka")) podminkyHTML += "<li>Záruka na dílo: 24 měsíců.</li>";
+        if (klauzule.includes("mlcenlivost")) podminkyHTML += "<li>Obě strany se zavazují k mlčenlivosti.</li>";
+
+        const smlouvaHTML = `
+<h2>SMLOUVA O DÍLO</h2>
+<h3>I. Smluvní strany</h3>
+<p><strong>Zhotovitel:</strong> ${z}</p>
+<p><strong>Objednatel:</strong> ${o}</p>
+
+<h3>II. Předmět smlouvy</h3>
+<p>Zhotovitel se zavazuje provést pro objednatele následující práce: <strong>${p}</strong>.</p>
+
+<h3>III. Cena díla</h3>
+<p>Sjednaná cena za dílo: <strong>${c}</strong>.</p>
+
+<h3>IV. Termín plnění</h3>
+<p>Zahájení: <strong>${od}</strong> | Dokončení: <strong>${do_}</strong></p>
+
+<h3>V. Doplňující poznámky</h3>
+<p>${poz || "Žádné."}</p>
+
+<h3>VI. Smluvní podmínky</h3>
+<ul>${podminkyHTML || "<li>Bez zvláštních podmínek</li>"}</ul>
+
+<h3>VII. Datum a podpisy</h3>
+<p>Datum: ${new Date().toLocaleDateString()}</p>
+<p><br>________________________ Zhotovitel<br>________________________ Objednatel</p>
+        `;
+
+        document.getElementById("smlouvaFinalHTML").innerHTML = smlouvaHTML;
+        document.getElementById("vystupSmlouvy").classList.remove("hidden");
+        window.scrollTo({ top: document.getElementById("vystupSmlouvy").offsetTop, behavior: "smooth" });
+      });
     });
+
+    function zpetNaHlavni() {
+      window.location.href = "index.html";
+    }
+
+    function dalsiKrok(stranka) {
+      window.location.href = stranka;
+    }
+
+    function stahnoutPDF() {
+      const element = document.getElementById("smlouvaFinalHTML");
+      html2pdf().set({ margin: 10, filename: 'pracovni_smlouva.pdf', html2canvas: { scale: 2 }, jsPDF: { unit: 'mm', format: 'a4' } })
+                .from(element)
+                .save();
+    }
+
+    function odeslatEmailem() {
+      const email = document.getElementById("email").value;
+      if (!email) {
+        alert("Zadejte e-mailovou adresu.");
+        return;
+      }
+      const text = document.getElementById("smlouvaFinalHTML").innerText;
+      const subject = encodeURIComponent("Pracovní smlouva");
+      const body = encodeURIComponent(text);
+      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    }
   </script>
 </body>
 </html>

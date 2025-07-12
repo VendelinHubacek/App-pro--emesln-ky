@@ -1,150 +1,199 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nová nabídka</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            text-align: center;
-            padding: 50px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nová nabídka</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      text-align: center;
+      padding: 50px;
+    }
 
-        h1 {
-            color: #00563b;
-        }
+    h1 {
+      color: #00563b;
+    }
 
-        input, textarea {
-            width: 80%;
-            padding: 10px;
-            margin: 8px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+    input, textarea {
+      width: 80%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
 
-        button {
-            padding: 15px 30px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 18px;
-            margin: 10px;
-            width: 250px;
-        }
+    button {
+      padding: 15px 30px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 18px;
+      margin: 10px;
+      width: 250px;
+    }
 
-        button:hover {
-            background-color: #45a049;
-        }
+    button:hover {
+      background-color: #45a049;
+    }
 
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
 
-        .generated-content {
-            background-color: #fff;
-            max-width: 700px;
-            margin: 30px auto;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            text-align: left;
-            line-height: 1.6;
-        }
+    .generated-content {
+      background-color: #fff;
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: left;
+      line-height: 1.6;
+    }
 
-        .summary {
-            background-color: #e9f7ef;
-            max-width: 700px;
-            margin: 20px auto;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 0 8px rgba(0,0,0,0.1);
-            text-align: left;
-        }
-    </style>
+    @media print {
+      body * {
+        display: none !important;
+      }
+
+      #generatedOffer, #generatedOffer * {
+        display: block !important;
+        visibility: visible !important;
+      }
+
+      #generatedOffer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .no-pdf {
+      display: inline-block;
+    }
+  </style>
 </head>
 <body>
 
 <h1>Vytvoření nabídky</h1>
 
 <form id="offerForm">
-    <input type="text" id="customerName" placeholder="Jméno zákazníka" required><br>
-    <input type="email" id="customerEmail" placeholder="E-mail zákazníka" required><br>
-    <textarea id="jobDescription" placeholder="Popis zakázky" rows="4" required></textarea><br>
-    <input type="number" id="price" placeholder="Cena (Kč)" required><br>
-    <button type="submit">Vygenerovat nabídku</button>
+  <input type="text" id="customerName" placeholder="Jméno zákazníka" required><br>
+  <input type="email" id="customerEmail" placeholder="E-mail zákazníka" required><br>
+  <textarea id="jobDescription" placeholder="Popis zakázky" rows="4" required></textarea><br>
+  <input type="number" id="price" placeholder="Cena (Kč)" required><br>
+  <button type="submit">Vygenerovat nabídku</button>
 </form>
 
 <div id="generatedOffer" class="generated-content"></div>
 <button id="downloadPdf" style="display:none;">Stáhnout nabídku jako PDF</button>
 
 <div class="button-container">
-    <button onclick="window.location.href='index.html'">Zpět na hlavní stránku</button>
-    <button onclick="window.location.href='vytvoritsmlouvu.html'">Pokračovat na vytvoření smlouvy</button>
+  <button onclick="window.location.href='cenik.html'">Zpět na výběr řemesla</button>
+  <button onclick="window.location.href='index.html'">Zpět na hlavní stránku</button>
+  <button onclick="window.location.href='vytvoritsmlouvu.html'">Pokračovat na vytvoření smlouvy</button>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    const data = JSON.parse(localStorage.getItem('nabidkaData')) || [];
-    let celkovyPopis = '';
-    let celkovaCena = 0;
+  const profese = [
+    "obkladaci", "zednici", "klempiri", "truhlari", "tesari", "elektromonteri",
+    "instalateri", "topenari", "vzduchotechnici", "maliri", "demontaznici",
+    "fasadnici", "sadrokartonari", "pokryvaci", "architekti",
+    "projektantiastavebnidozor", "zakladatelestaveb", "dlazdici",
+    "plynari", "kominici", "ostatnistavebniprace", "podlahari", "lakyrnici"
+  ];
 
-    if (data.length > 0) {
-        data.forEach(item => {
-            celkovyPopis += `${item.name} – ${item.quantity} × ${item.price} = ${item.total}\n`;
-            celkovaCena += parseFloat(item.total.replace(' Kč', '').replace(',', '.'));
-        });
-    }
+  let celkovyPopis = '';
+  let celkovaCena = 0;
+  let vsechnyPolozky = [];
 
-    document.getElementById('jobDescription').value = celkovyPopis.trim();
-    document.getElementById('price').value = celkovaCena.toFixed(2);
+  profese.forEach(profese => {
+    const data = JSON.parse(localStorage.getItem('cenik_' + profese)) || [];
+    data.forEach(item => {
+      vsechnyPolozky.push(item);
+      celkovyPopis += `${item.name} – ${item.quantity} × ${item.price} = ${item.total}\n`;
+      celkovaCena += parseFloat(item.total.replace(' Kč', '').replace(',', '.'));
+    });
+  });
+
+  document.getElementById('jobDescription').value = celkovyPopis.trim();
+  document.getElementById('price').value = celkovaCena.toFixed(2);
+  sessionStorage.setItem('nabidkaData', JSON.stringify(vsechnyPolozky));
 });
 
 document.getElementById('offerForm').addEventListener('submit', function (e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    const name = document.getElementById('customerName').value;
-    const email = document.getElementById('customerEmail').value;
-    const jobDescription = document.getElementById('jobDescription').value;
-    const price = document.getElementById('price').value;
+  const name = document.getElementById('customerName').value;
+  const email = document.getElementById('customerEmail').value;
+  const price = document.getElementById('price').value;
+  const data = JSON.parse(sessionStorage.getItem('nabidkaData')) || [];
 
-    const data = JSON.parse(localStorage.getItem('nabidkaData')) || [];
+  let polozkyHtml = '<table border="1" cellpadding="8" style="width:100%;border-collapse:collapse;"><tr><th>Položka</th><th>Cena za jednotku</th><th>Množství</th><th>Celkem</th></tr>';
+  data.forEach(item => {
+    polozkyHtml += `<tr>
+      <td>${item.name}</td>
+      <td>${item.price}</td>
+      <td>${item.quantity}</td>
+      <td>${item.total}</td>
+    </tr>`;
+  });
+  polozkyHtml += '</table>';
 
-    let polozkyHtml = '<table border="1" cellpadding="8" style="width:100%;border-collapse:collapse;"><tr><th>Položka</th><th>Cena za jednotku</th><th>Množství</th><th>Celkem</th></tr>';
+  const offerContent = `
+    <h2>Cenová nabídka</h2>
+    <p><strong>Zákazník:</strong> ${name}</p>
+    <p><strong>E-mail:</strong> ${email}</p>
+    <h3>Detail zakázky:</h3>
+    ${polozkyHtml}
+    <h3>Celková cena: ${price} Kč</h3>
+    <div class="no-pdf"><button onclick="window.print()">Vytisknout nabídku</button></div>
+  `;
 
-    data.forEach(item => {
-        polozkyHtml += `<tr>
-            <td>${item.name}</td>
-            <td>${item.price}</td>
-            <td>${item.quantity}</td>
-            <td>${item.total}</td>
-        </tr>`;
-    });
+  document.getElementById('generatedOffer').innerHTML = offerContent;
+  document.getElementById('downloadPdf').style.display = 'inline-block';
 
-    polozkyHtml += '</table>';
+  localStorage.setItem('ulozenyZakaznik', JSON.stringify({ name, email }));
 
-    const offerContent = `
-        <h2>Cenová nabídka</h2>
-        <p><strong>Zákazník:</strong> ${name}</p>
-        <p><strong>E-mail:</strong> ${email}</p>
-        <h3>Detail zakázky:</h3>
-        ${polozkyHtml}
-        <h3>Celková cena: ${price} Kč</h3>
-        <button onclick="window.print()">Vytisknout nabídku</button>
-    `;
+  const profese = [
+    "obkladaci", "zednici", "klempiri", "truhlari", "tesari", "elektromonteri",
+    "instalateri", "topenari", "vzduchotechnici", "maliri", "demontaznici",
+    "fasadnici", "sadrokartonari", "pokryvaci", "architekti",
+    "projektantiastavebnidozor", "zakladatelestaveb", "dlazdici",
+    "plynari", "kominici", "ostatnistavebniprace", "podlahari", "lakyrnici"
+  ];
+  profese.forEach(profese => localStorage.removeItem('cenik_' + profese));
+  sessionStorage.removeItem('nabidkaData');
+});
 
-    document.getElementById('generatedOffer').innerHTML = offerContent;
-    document.getElementById('downloadPdf').style.display = 'inline-block';
+// PDF export bez .no-pdf
+document.getElementById('downloadPdf').addEventListener('click', function () {
+  const cloned = document.getElementById('generatedOffer').cloneNode(true);
+  cloned.querySelectorAll('.no-pdf').forEach(el => el.remove());
 
-    localStorage.setItem('ulozenyZakaznik', JSON.stringify({ name, email }));
-    localStorage.removeItem('nabidkaData');
+  const opt = {
+    margin:       0.5,
+    filename:     'nabidka.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2 },
+    jsPDF:        { unit: 'cm', format: 'a4', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opt).from(cloned).save();
 });
 </script>
 
